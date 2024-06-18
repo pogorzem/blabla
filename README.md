@@ -1,2 +1,2 @@
 # blabla
-* @pogorzem
+
