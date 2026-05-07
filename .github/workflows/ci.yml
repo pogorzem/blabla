@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    tags:
+       - 'v*'
+    branches:
+      - prod
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: check refs
+        run: |
+          echo "github.ref_name ${{ github.ref_name }}"
+          echo "github.base_ref ${{ github.base_ref }}"
+      - name: exit if wrong branch
+        if: endsWith(github.event.base_ref,'prod') == false && github.ref_name != 'prod'
+        run: exit -1
+  
