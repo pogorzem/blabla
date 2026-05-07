@@ -8,6 +8,7 @@ on:
        - 'v*'
     branches:
       - prod
+      - main
 
 jobs:
   test:
@@ -18,6 +19,7 @@ jobs:
         run: |
           echo "github.ref_name ${{ github.ref_name }}"
           echo "github.base_ref ${{ github.base_ref }}"
+          echo "github.event.base_ref ${{ github.event.base_ref }}"
       - name: exit if wrong branch
         if: endsWith(github.event.base_ref,'prod') == false && github.ref_name != 'prod'
         run: exit -1
